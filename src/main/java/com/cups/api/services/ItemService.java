@@ -28,6 +28,19 @@ public class ItemService {
 		return result.isPresent() ? result.get() : null;
 	}
 	
+	public Item getbyName(String name) {
+		Item item = new Item(); 
+		item.setName(name); 
+		Optional<Item> result = ItemRepo.findByName(name);
+		return result.isPresent() ? result.get() : null;
+	}
+	
+//	public List<Item> getbyCategory(String category) {
+//		Item item = new Item(); 
+//		item.setCategory(category); 
+//		List<Optional<Item>> result = ItemRepo.findByCategory(category);
+//		return result.isPresent() ? result.get() : null;
+//	}
 	public Item update(int id, Item data) {
 		Optional<Item> result = ItemRepo.findById(id);
 		if(result.isPresent()) {

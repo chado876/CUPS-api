@@ -1,5 +1,7 @@
 package com.cups.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +45,7 @@ public class AuthController {
 		return String.format("Fake-Token-%s-%s", credentials.getManagerid(),
 				credentials.getPassword());
 		}
+	
 	@PostMapping("/customerlogin")
 	public ResponseResult<AuthToken> customerLogin(
 			@RequestBody CustomerLoginViewModel credentials
@@ -71,7 +74,7 @@ public class AuthController {
 		Customer customer = authService.getUserFromToken(token);
 		
 		if(customer != null) {
-			customer.setTokens(tokens);
+			customer.setTokens(token);
 			return customer;
 		}
 		throw new ResourceNotFoundException("Customer", "token", token);

@@ -15,34 +15,34 @@ import com.cups.api.repositories.ICustomerRepository;
 
 @Component
 public class CustomerSeeder {
-	
-	private Customer[] defaultData = new Customer[] {
-			new Customer(1,"password", "John", "Doe", "rec.mp3","image.jpg",500.00)
-			
-	};
-	
-	@Autowired
-	protected ICustomerRepository customerRepo;
-      
-	@EventListener
-	public void seed(ContextRefreshedEvent event) {
-		
-		System.out.println("-------------Seeding Customer--------");
-		
-		
-		for(Customer defaultCustomer : defaultData ) {
-			
-			Example<Customer> customerExample = Example.of(defaultCustomer);
-			Optional<Customer> customerResult = customerRepo.findOne(customerExample);
-			
-			if(customerResult.isPresent()) {
-				System.out.println("Customer already in database" + defaultCustomer);;
-			} else {
-				System.out.println("Inserting customer into database" + defaultCustomer);
-				customerRepo.save(defaultCustomer);
-			}
-		}
-		
-		System.out.println("-------------Seeding Completed--------");
-	}
+//	
+//	private Customer[] defaultData = new Customer[] {
+//			new Customer(6,"password", "Sam", "Doe", "rec.mp3","image.jpg",500.00)
+//			
+//	};
+//	
+//	@Autowired
+//	protected ICustomerRepository customerRepo;
+//      
+//	@EventListener
+//	public void seed(ContextRefreshedEvent event) {
+//		
+//		System.out.println("-------------Seeding Customer--------");
+//		
+//		
+//		for(Customer defaultCustomer : defaultData ) {
+//			
+//			Example<Customer> customerExample = Example.of(defaultCustomer);
+//			Optional<Customer> customerResult = customerRepo.findOne(customerExample);
+//			
+//			if(customerResult.isPresent()) {
+//				System.out.println("Customer already in database" + defaultCustomer);;
+//			} else {
+//				System.out.println("Inserting customer into database" + defaultCustomer);
+//				customerRepo.save(defaultCustomer);
+//			}
+//		}
+//		
+//		System.out.println("-------------Seeding Completed--------");
+//	}
 }

@@ -13,30 +13,30 @@ import com.cups.api.repositories.IItemRepository;
 
 @Component
 public class ItemSeeder {
-	private Item[] defaultData = new Item[] {
-			new Item(1,"Americano","Beverage",8.99,10,"img.com","asl.com")	
-	};
-	@Autowired
-	protected IItemRepository itemRepo;
-	
-	@EventListener
-	public void seed(ContextRefreshedEvent event) {
-		System.out.println("-------Seeding Items-------");
-		
-		for(Item defaultItem : defaultData) {
-			Example<Item> itemExample = Example.of(defaultItem);
-			Optional<Item> itemResult = itemRepo.findOne(itemExample);
-			
-			if(itemResult.isPresent()) {
-				System.out.println("Item already in database" + defaultItem);;
-			} else {
-				System.out.println("Inserting item into database" + defaultItem);
-				itemRepo.save(defaultItem);
-			}
-			
-		}
-		
-		System.out.println("-------Completed Seeding Items-------");
-
-	}
+//	private Item[] defaultData = new Item[] {
+//			new Item(1,"Americano","Beverage",8.99,10,"img.com","asl.com")	
+//	};
+//	@Autowired
+//	protected IItemRepository itemRepo;
+//	
+//	@EventListener
+//	public void seed(ContextRefreshedEvent event) {
+//		System.out.println("-------Seeding Items-------");
+//		
+//		for(Item defaultItem : defaultData) {
+//			Example<Item> itemExample = Example.of(defaultItem);
+//			Optional<Item> itemResult = itemRepo.findOne(itemExample);
+//			
+//			if(itemResult.isPresent()) {
+//				System.out.println("Item already in database" + defaultItem);;
+//			} else {
+//				System.out.println("Inserting item into database" + defaultItem);
+//				itemRepo.save(defaultItem);
+//			}
+//			
+//		}
+//		
+//		System.out.println("-------Completed Seeding Items-------");
+//
+//	}
 }

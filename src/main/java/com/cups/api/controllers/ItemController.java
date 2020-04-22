@@ -1,6 +1,7 @@
 package com.cups.api.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cups.api.entities.Item;
@@ -43,9 +46,56 @@ public class ItemController {
 		return data;
 	}
 	
+	@GetMapping("/byName{name}")
+	public Item get(@PathVariable("name") String name ) {
+		Item data = itemService.getbyName(name);
+		if(data==null) {
+			throw new ResourceNotFoundException("Item","name",name);
+		}
+		
+		return data;
+	} 
+	
+//	@GetMapping("/byCategory{category}")
+//	public Item get(@PathVariable("category") String category ) {
+//		Item data = itemService.getbyCategory(category);
+//		if(data==null) {
+//			throw new ResourceNotFoundException("Item","category",category);
+//		}
+//		
+//		return data;
+//	} 
+//	
+//	@GetMapping("/byCategory{category}")
+//	public Item get(@PathVariable("category") String category ) {
+//		List<Item> data = itemService.getAll();
+//		List<Item> filtered_data = null;
+//
+//		if(data==null) {
+//			throw new ResourceNotFoundException("Item","category",category);
+//		} else {
+//			int n=0;
+//			while(data.isEmpty() == false) {
+//				if (category.contentEquals("Beverage")){
+//					if(data.get(n).getCategory().contentEquals("Beverage")) {
+//							filtered_data.add(data.get(n));
+//					}
+//						n++;
+//			}
+//			}
+//			
+//		}
+		
+//		return (Item) filtered_data;
+//	} 
+	
 	@PostMapping("")
-	public Item create(@Valid @RequestBody Item data) {
+	public Item create(@Valid @RequestBody Item data) { 
+		Item duplicate = itemService.getbyName(data.getName());
+		if(duplicate==null) {
 		return itemService.create(data);
+		} 
+		return null;
 	}
 	
 	@PutMapping("/{id}")
